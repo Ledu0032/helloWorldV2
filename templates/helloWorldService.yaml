@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2022-12-29T09:25:34Z"
+  labels:
+    app: {{ .Values.metadata.app }} 
+  name: {{ .Values.metadata.name }}
+  namespace: {{ .Values.metadata.namespace }}
+  resourceVersion: "144866"
+  uid: 143f748c-b1a3-44e9-a9cd-2c83ab9e6466
+spec:
+  clusterIP: 10.107.143.179
+  clusterIPs:
+  - 10.107.143.179
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 30523
+    port: {{ .Values.service.port }}
+    protocol: TCP
+    targetPort: {{ .Values.service.port }}
+  selector:
+    app: {{ .Values.metadata.app }} 
+  sessionAffinity: None
+  type: {{ .Values.service.type }}
+status:
+  loadBalancer: {}
