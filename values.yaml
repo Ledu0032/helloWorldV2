@@ -18,10 +18,19 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
+deployment:
+  maxSurge: 25%
+  maxUnavailable: 25%
+  type: RollingUpdate
+
 ingres:
+  ingressClassName: nginx
+  name: example-ingress
   hosts:
     - hello-world.info
 
 service:
   type: NodePort
   port: 8080
+  nodePort: 30523
+  clusterIP: 10.107.143.179

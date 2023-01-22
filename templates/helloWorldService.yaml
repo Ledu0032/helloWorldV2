@@ -6,10 +6,8 @@ metadata:
     app: {{ .Values.metadata.app }} 
   name: {{ .Values.metadata.name }}
   namespace: {{ .Values.metadata.namespace }}
-  resourceVersion: "144866"
-  uid: 143f748c-b1a3-44e9-a9cd-2c83ab9e6466
 spec:
-  clusterIP: 10.107.143.179
+  clusterIP: {{ .Values.service.clusterIP }}
   clusterIPs:
   - 10.107.143.179
   externalTrafficPolicy: Cluster
@@ -18,7 +16,7 @@ spec:
   - IPv4
   ipFamilyPolicy: SingleStack
   ports:
-  - nodePort: 30523
+  - nodePort: {{ .Values.service.nodePort }}
     port: {{ .Values.service.port }}
     protocol: TCP
     targetPort: {{ .Values.service.port }}
