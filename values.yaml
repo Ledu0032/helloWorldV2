@@ -26,8 +26,7 @@ deployment:
 ingres:
   ingressClassName: nginx
   name: example-ingress
-  hosts:
-    - hello-world.info
+  hosts: hello-world.info
 
 service:
   type: NodePort
