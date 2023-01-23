@@ -27,5 +27,13 @@ spec:
       - image: {{ .Values.image.repository }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         name: {{ .Chart.Name }}
+        livenessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.service.port }}
+        readinessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.service.port }}
 
 
