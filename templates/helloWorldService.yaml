@@ -8,8 +8,7 @@ metadata:
   namespace: {{ .Values.metadata.namespace }}
 spec:
   clusterIP: {{ .Values.service.clusterIP }}
-  clusterIPs:
-  - 10.107.143.179
+  clusterIPs: {{ .Values.service.clusterIP }}
   externalTrafficPolicy: Cluster
   internalTrafficPolicy: Cluster
   ipFamilies:
@@ -24,5 +23,3 @@ spec:
     app: {{ .Values.metadata.app }} 
   sessionAffinity: None
   type: {{ .Values.service.type }}
-status:
-  loadBalancer: {}

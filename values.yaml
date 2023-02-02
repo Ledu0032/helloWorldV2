@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+replicaCount: 2
 
 metadata:
   app: web
@@ -26,10 +26,24 @@ deployment:
 ingres:
   ingressClassName: nginx
   name: example-ingress
-  hosts: hello-world.info
+  hosts: 
+   - host: hello-world.info 
 
 service:
   type: NodePort
   port: 8080
   nodePort: 30523
   clusterIP: 10.107.143.179
+
+nodeSelector: 
+  # example to me, that say to me if syntax is good for with functions 
+  region: americas
+
+tolerations: {}
+
+affinity: {}
+
+resources: 
+  region: americas
+
+podSecurityContext: {}
