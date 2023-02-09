@@ -7,27 +7,27 @@ on:
     branches: [ "main" ]
 
 jobs:
-  release:
-    # depending on default permission settings for your org (contents being read-only or read-write for workloads), you will have to add permissions
-    # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
-    permissions:
-      contents: write
+  build:
+    name: publish gcr
     runs-on: ubuntu-latest
+    environment: prod
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v2
+        name: checkout repo
+      
+      - name: install helm
+        uses: Azure/setup-helm@v1
         with:
-          fetch-depth: 0
-
-      - name: Configure Git
+          # Version of helm
+          version: ${{ env.HELM_VERSION_TO_INSTALL }} # default is latest
+      - name: login to acr using helm
         run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          echo ${{ secrets.GITHUB_TOKEN }} | helm registry login ${{ env.GCR_IMAGE }} --username ${{ github.repository_owner }} --password-stdin
 
-      - name: Install Helm
-        uses: azure/setup-helm@v3
+      - name: save helm chart to local registry
+        run: |
+          helm chart save ${{ github.workspace }}/src/azure-vote-helm-chart/ ${{ env.GCR_IMAGE }}:${{ github.sha }}
 
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.5.0
-        env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      - name: publish chart to acr
+        run: |
+          helm chart push ${{ env.GCR_IMAGE }}:${{ github.sha }}
