@@ -2,18 +2,18 @@ name: 'Helm3 pipeline'
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
 
   test:
-    runs-on: 'ubuntu-20.04'
+    runs-on: 'ubuntu-latest'
     services:
       chartmuseum:
-        image: chartmuseum/chartmuseum:v0.12.0
+        image: ledu32/helloworld
         ports:
         - 8080:8080
         env:
