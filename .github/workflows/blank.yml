@@ -78,5 +78,4 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Helm Push Action
-        uses: Goodsmileduck/helm-push-action@v3
+      
