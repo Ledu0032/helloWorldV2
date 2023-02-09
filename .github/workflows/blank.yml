@@ -31,8 +31,9 @@ jobs:
     - name: 'Build docker image'
       run: 'docker build -t helm .'
 
-    - name: 'Test helm v3 version'
-      run: 'docker run --rm -i --entrypoint=helm helm version -c'
+    - name: Helm Push Action
+      uses: Goodsmileduck/helm-push-action@v3
+
 
     - name: 'Test helm v3 push'
       uses: ./
