@@ -19,7 +19,7 @@ jobs:
         uses: Azure/setup-helm@v1
         with:
           # Version of helm
-          version: ${{ env.HELM_VERSION_TO_INSTALL }} # default is latest
+          version: v3.11.1 # default is latest
       - name: login to acr using helm
         run: |
           echo ${{ secrets.GITHUB_TOKEN }} | helm registry login ${{ env.GCR_IMAGE }} --username ${{ github.repository_owner }} --password-stdin
