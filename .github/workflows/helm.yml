@@ -19,4 +19,5 @@ jobs:
         mkdir helm-example
         cd helm-example
         helm create new-chart
+        cd new-chart
         helm install new-chart .
