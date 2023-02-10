@@ -31,10 +31,6 @@ jobs:
     - name: 'Build docker image'
       run: 'docker build -t helm .'
 
-    - name: Helm Push Action
-      uses: Goodsmileduck/helm-push-action@v3
-
-
     - name: 'Test helm v3 push'
       uses: ./
       env:
@@ -44,4 +40,5 @@ jobs:
         CHARTMUSEUM_URL: 'http://locallhost:8080'
         CHARTMUSEUM_USER: 'admin'
         CHARTMUSEUM_PASSWORD: 'test'
-        #
+    - name: Helm Push Action
+      uses: Goodsmileduck/helm-push-action@v3
