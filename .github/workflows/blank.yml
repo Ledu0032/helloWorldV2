@@ -44,3 +44,4 @@ jobs:
         CHARTMUSEUM_URL: 'http://locallhost:8080'
         CHARTMUSEUM_USER: 'admin'
         CHARTMUSEUM_PASSWORD: 'test'
+        #
